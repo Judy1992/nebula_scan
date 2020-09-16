@@ -3,7 +3,6 @@ package com.example.graph.service.drawgraph;
 import com.example.graph.domain.EdgeDomain;
 import com.example.graph.domain.VertexDomain;
 import com.example.graph.service.MyEdge;
-import com.example.graph.service.drawgraph.Legend;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jgrapht.Graph;
@@ -12,10 +11,10 @@ import org.jgrapht.alg.spanning.PrimMinimumSpanningTree;
 import org.jgrapht.graph.builder.GraphTypeBuilder;
 import org.jgrapht.util.SupplierUtil;
 
-
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @NoArgsConstructor
@@ -41,12 +40,9 @@ public class DrawGraph {
         }
 
         for (EdgeDomain edgeDomain : edgeDomainList){
-
-            if (edgeDomain.getSrcid() <= 129 && edgeDomain.getDstid() <= 129) {
-                graph.addEdge(edgeDomain.getSrcid().toString(), edgeDomain.getDstid().toString());
-                MyEdge newEdge = graph.getEdge(edgeDomain.getSrcid().toString(), edgeDomain.getDstid().toString());
-                graph.setEdgeWeight(newEdge, edgeDomain.getWeight());
-            }
+            graph.addEdge(edgeDomain.getSrcid().toString(), edgeDomain.getDstid().toString());
+            MyEdge newEdge = graph.getEdge(edgeDomain.getSrcid().toString(), edgeDomain.getDstid().toString());
+            graph.setEdgeWeight(newEdge, edgeDomain.getWeight());
         }
 
         return graph;
